@@ -1,6 +1,6 @@
-class paperboy
+class Paperboy
   attr_accessor :deliver
-  attr_reader :quota :earnings
+  attr_reader :quota
 
   def initialize(name, side)
     @name                   = name
@@ -14,31 +14,43 @@ class paperboy
     @over                   = 0.50
   end
 
-  def earning
+  def earnings
     total = @houses_delivered - @quota
     if total < 0
-      @earning = total.abs * @lost
-    elsif
-      @earning = (@quota * @pay) + (total * @over)
+      @earnings     = total.abs * @lost
+    elsif total > 0
+      @earnings     = (@quota * @pay) + (total * @over)
     else
-      @earning = @quota * @pay
+      @earnings     = @quota * @pay
     end
-    return @earning
+    return @earnings
   end
 
   def deliver(start_address, end_address)
+
     total = (end_address - start_address)/2
+    unless total % 2 == 0
+      total = total.floor + 1
+    end
+
     if @side == "even"
       @houses_delivered = total.floor
     elsif @side == "odd"
-      @houses_delivered = total.floor + 1
+      @houses_delivered = total.floor
     else
-      @earning = "Have not choose a side to deliver, even or odd"
+      @earnings = "Have not choose a side to deliver, even or odd"
     end
-    return @earning
+    return @earnings
   end
 
   def report
-    puts "I'm #{name}, I have delievered #{@houses_delivered} houses and I have earned #{earning}"
+    puts "I'm #{@name}, I have delievered #{@houses_delivered} houses and I have earned $#{@earnings}"
   end
 end
+
+tommy = Paperboy.new("Tommy", "even")
+
+puts tommy.quota # => 50
+tommy.deliver(101, 220) # => 17.75
+puts tommy.earnings #=> 17.5
+puts tommy.report # => "I'm Tommy, I've delivered 60 papers and I've earned $17.5 so far!"
