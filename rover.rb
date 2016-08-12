@@ -5,7 +5,6 @@ class Rover
     @xs = 0
     @direction = "N"
     @origin = []
-
   end
 
   def read_instruction
@@ -26,9 +25,9 @@ class Rover
       when "R" then self.turn("R")
       when "M" then self.move
     end
-      puts "current [#{@xs}, #{@ys}] of #{@direction}"
+      puts "Rover moved current [#{@xs}, #{@ys}] of #{@direction}"
     end
-    puts "end location is [#{@xs}, #{@ys}] and facing #{@direction}"
+      puts "Rover end location is [#{@xs}, #{@ys}] and facing #{@direction}"
 
   end
 
@@ -43,10 +42,9 @@ class Rover
        @xs += -1
     else
       # input_error
-      puts "WTF"
+      puts "error"
     end
   end
-
 
   def turn(spin)
     case spin
@@ -56,6 +54,8 @@ class Rover
       when "E" then @direction = "N"
       when "S" then @direction = "E"
       when "W" then @direction = "S"
+      else
+        puts "error"
       end
     when "R"
       case @direction
@@ -63,126 +63,11 @@ class Rover
       when "E" then @direction = "S"
       when "S" then @direction = "W"
       when "W" then @direction = "N"
+      else
+        puts "error"
       end
     end
   end
 end
-
-wow = Rover.new(0,0,"N")
-wow.read_instruction
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# class Rover
-#   def initialize(x_state, y_state, direction)
-#     @x_state      = x_state
-#     @y_state      = y_state
-#     @direction    = direction.upcase
-#     @position     = []
-#     @command      = 0
-#     @state        = 0
-#   end
-#
-#   def position
-#     @position = [@x_state, @y_state]
-#   end
-#   def instructions
-#     puts "command"
-#     input = gets.chomp
-#     position
-#     puts "Current Coordinates #{position} and direction of #{@direction}"
-#     input_array = input.upcase.scan(/\w/)
-#     input_array.each do |x|
-#       if x == "M"
-#         move("M")
-#       elsif x == "L"
-#         @command = "L"
-#
-#       elsif x == "R"
-#         @command = "R"
-#
-#       else
-#         puts "invalid input"
-#     end
-
-#   end
-#
-#   def move(map)
-#     if @direction == "N"
-#       @y_state = @y_state += 1
-#       position
-#       puts position
-#     elsif @direction == "W"
-#       @x_state = @x_state += 1
-#       position
-#       puts position
-#     elsif @direction == "E"
-#       @x_state = @x_state -= 1
-#       position
-#       puts position
-#     elsif @direction == "S"
-#       @y_state = @y_state -= 1
-#       position
-#       puts position
-#     else
-#       puts "Invalid direction"
-#     end
-#     return @position
-#   end
-#
-#   def turn
-#     if @command == "L"
-#         @state = (0)
-#         # face
-#     elsif @command == "R"
-#         @state = (1)
-#         # face
-#     else
-#       puts "wrong input"
-#     end
-#   end
-#
-#   # def face
-#   #   if @direction == "N"
-#   #     if @state == (1)
-#   #       @direction = "E"
-#   #     else
-#   #       @direction = "W"
-#   #     end
-#   #   elsif @direction == "W"
-#   #     if @state == (1)
-#   #       @direction = "N"
-#   #     else
-#   #       @direction = "S"
-#   #     end
-#   #   elsif @direction == "E"
-#   #     if @state == (1)
-#   #       @direction = "S"
-#   #     else
-#   #       @direction = "N"
-#   #     end
-#   #   else
-#   #       puts 'whats up'
-#   #   end
-#   #
-#   # end
-# end
-# end
-#
-# pew = Rover.new(0,0,"N")
-# pew.instructions
+bat_mobile = Rover.new(0,0,"N")
+bat_mobile.read_instruction
