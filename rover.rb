@@ -20,31 +20,51 @@ class Rover
     user_moves  = gets.chomp.upcase.split(//)
     puts user_moves
     puts @origin
-    user_moves.each do |move|
-      case move
-      when move == "M" then Self.move
-      when move == "L" then
-      when move == "R" then
-      end
+    user_moves.each do |mover|
+    case mover
+      when "L" then self.turn("L")
+      when "R" then self.turn("R")
+      when "M" then self.move
+    end
+      puts "current [#{@xs}, #{@ys}] of #{@direction}"
     end
     puts "end location is [#{@xs}, #{@ys}] and facing #{@direction}"
 
   end
 
   def move
-    case move
-    when @direction == "N" then @ys += 1
-    when @direction == "E" then @xs += 1
-    when @direction == "S" then @ys += -1
-    when @direction == "W" then @xs += -1
+    if @direction == "N"
+       @ys += 1
+    elsif @direction == "E"
+       @xs += 1
+    elsif @direction == "S"
+       @ys += -1
+    elsif @direction == "W"
+       @xs += -1
     else
       # input_error
+      puts "WTF"
     end
   end
 
 
-  def turn(go)
-
+  def turn(spin)
+    case spin
+    when "L"
+      case @direction
+      when "N" then @direction = "W"
+      when "E" then @direction = "N"
+      when "S" then @direction = "E"
+      when "W" then @direction = "S"
+      end
+    when "R"
+      case @direction
+      when "N" then @direction = "E"
+      when "E" then @direction = "S"
+      when "S" then @direction = "W"
+      when "W" then @direction = "N"
+      end
+    end
   end
 end
 
